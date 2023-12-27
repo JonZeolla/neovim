@@ -4,12 +4,23 @@ local ensureInstalled = {
   "lua-language-server",
   "pyright",
   "bicep-lsp",
+  "cypher-language-server",
+  "css-lsp",
+  "awk-language-server",
+  "docker-compose-language-service",
+  "dockerfile-language-server",
+  "helm-ls",
+  "html-lsp",
+  "java-language-server",
+  "json-lsp",
+  "powershell-editor-services",
+  "ruff-lsp",
+  "terraform-ls",
+  "typos-lsp",
+  "yaml-language-server",
 
-  -- Everything else
-  "black",
+  -- Needed for dap-python
   "debugpy",
-  "mypy",
-  "ruff",
 }
 
 local plugin = {

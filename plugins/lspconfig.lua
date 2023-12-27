@@ -9,6 +9,20 @@ local servers = {
   "lua_ls",
   "pyright",
   "bicep",
+  "cypher_ls",
+  "cssls",
+  "awk_ls",
+  "docker_compose_language_service",
+  "dockerls",
+  "helm_ls",
+  "html",
+  "java_language_server",
+  "jsonls",
+  "powershell_es",
+  "ruff_lsp",
+  "terraformls",
+  "typos_lsp",
+  "yamlls",
 }
 
 local plugin = {

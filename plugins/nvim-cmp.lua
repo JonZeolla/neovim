@@ -17,6 +17,7 @@ local plugin = {
       { name = "path",     group_index = 2 },
     },
     mapping = {
+      -- This updates enter (carriage return) so we can hit enter at the end of lines when there are suggestions without accepting them
       ["<CR>"] = cmp.mapping({
         i = function(fallback)
           if cmp.visible() and cmp.get_active_entry() then
