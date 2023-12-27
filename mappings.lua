@@ -1,5 +1,11 @@
 local M = {}
 
+M.general = {
+  n = {
+    ["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "Git status"}
+  }
+}
+
 M.dap = {
   plugin = true,
   n = {

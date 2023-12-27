@@ -1,4 +1,4 @@
--- Jon Zeolla's custom configs
+-- Global custom configs
 -- Set whichkey leader
 vim.g.which_key_leader = " "
 -- Always parse as unix

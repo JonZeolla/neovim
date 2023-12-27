@@ -1,81 +1,35 @@
-local overrides = require("custom.configs.overrides")
+-- This essentially re-introduces a design pattern that NvChad has documented as "undesirable" on https://nvchad.com/docs/config/plugins but is supported by
+-- lazy.nvim
+--
+-- In the future consider refactoring this to be dynamic.
+-- I didn't do this initially because I found lua doesn't have great options for filesystem operations; LuaFileSystem hasn't had a release in 3 years as of writing this, if I did install that, luarocks (the package manager) doesn't support upgrading (see the below issue open since 2011), and native options just end up shelling out to ls or find 🤮
+--
+-- References:
+-- - https://luarocks.org/modules/hisham/luafilesystem
+-- - https://github.com/luarocks/luarocks/issues/22
+
+local ale = require("custom.plugins.ale")
+local copilot = require("custom.plugins.copilot")
+local copilot_cmp = require("custom.plugins.copilot-cmp")
+local dap = require("custom.plugins.dap")
+local dap_python = require("custom.plugins.dap-python")
+local dap_ui = require("custom.plugins.dap-ui")
+local lspconfig = require("custom.plugins.lspconfig")
+local mason = require("custom.plugins.mason")
+local nvim_cmp = require("custom.plugins.nvim-cmp")
+local treesitter = require("custom.plugins.treesitter")
 
 local plugins = {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = overrides.nvim_treesitter
-  },
-  {
-    "dense-analysis/ale",
-    lazy = false,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "InsertEnter",
-    opts = overrides.copilot,
-    config = function()
-      require("copilot").setup({
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-        }
-      })
-    end,
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = overrides.mason
-  },
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      -- Uses the default config
-      require "plugins.configs.lspconfig"
-      -- Updates it with the custom config
-      require "custom.configs.lspconfig"
-    end,
-  },
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = "mfussenegger/nvim-dap",
-    config = function()
-      local dap = require("dap")
-      local dapui = require("dapui")
-      dapui.setup()
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
-      end
-    end
-  },
-  {
-    "mfussenegger/nvim-dap",
-    opts = {},
-    config = function(_, opts)
-      require("core.utils").load_mappings("dap")
-    end
-  },
-  {
-    "mfussenegger/nvim-dap-python",
-    ft = "python",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      "rcarriga/nvim-dap-ui",
-    },
-    opts = {},
-    config = function(_, opts)
-      local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
-      require("dap-python").setup(path)
-      require("core.utils").load_mappings("dap_python")
-    end,
-  },
+  ale,
+  copilot,
+  copilot_cmp,
+  dap,
+  dap_python,
+  dap_ui,
+  lspconfig,
+  mason,
+  nvim_cmp,
+  treesitter,
 }
 
 return plugins
