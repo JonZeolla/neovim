@@ -1,6 +1,4 @@
 -- Global custom configs
--- Set whichkey leader
-vim.g.which_key_leader = " "
 -- Always parse as unix
 vim.cmd('set ffs=unix')
 -- Blink instead of beep
@@ -15,9 +13,10 @@ vim.cmd('set scrolloff=2')
 vim.cmd('set ignorecase smartcase')
 -- Remove highlighting when searching
 vim.cmd('set nohlsearch')
--- Set the textwidth to 160 characters
+-- Line length details
 vim.cmd('set textwidth=160')
--- But don't word wrap when typing text
+vim.cmd('set colorcolumn=160')
+-- Don't word wrap when typing text
 vim.cmd('set formatoptions-=t')
 -- Share the macOS clipboard
 vim.cmd('set clipboard=unnamed')
@@ -25,12 +24,6 @@ vim.cmd('set clipboard=unnamed')
 -- Key mappings
 -- Toggle spellcheck
 vim.api.nvim_set_keymap('n', '<Leader>s', ':set spell!<CR>', { silent = true })
--- Reformat XML
-vim.api.nvim_set_keymap('n', '<Leader>x', [[:%!xmllint --format %<CR>]], { silent = true })
--- Reformat JSON
-vim.api.nvim_set_keymap('n', '<Leader>j', [[:%!jq . %<CR>]], { silent = true })
--- Vertically split and jump to the new side
-vim.api.nvim_set_keymap('n', '<Leader>n', ':vsplit <CR><C-w><C-w>', { silent = true })
 
 -- Configure ALE
 vim.g.ale_completion_enabled = 1

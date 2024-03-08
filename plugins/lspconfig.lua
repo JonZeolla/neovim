@@ -25,18 +25,41 @@ local servers = {
   "yamlls",
 }
 
+-- This is a list of language servers which have custom configurations under language_servers/
+local customized = {
+  "lua_ls",
+  "yamlls",
+}
+
 local plugin = {
   "neovim/nvim-lspconfig",
   config = function()
-    -- Uses the default config
+    -- Use the default config
     require "plugins.configs.lspconfig"
 
-    -- Updates it with the custom config
     for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
+      -- Baseline opts
+      local opts = { on_attach = on_attach, capabilities = capabilities }
+
+      -- Check if the server has a custom configuration
+      if vim.tbl_contains(customized, lsp) then
+        -- Construct the standard path to the custom config
+        local custom_config_path = "custom.language_servers." .. lsp
+
+        -- Safely try to load the custom config
+        local status_ok, custom_opts = pcall(require, custom_config_path)
+
+        if status_ok then
+          -- Merge the custom configuration options with the baseline opts
+          opts = vim.tbl_deep_extend("force", opts, custom_opts)
+        else
+          -- This will show up in nvim at the bottom when a file is opened
+          print("Failed to load the custom config for " .. lsp)
+        end
+      end
+
+      -- Run the actual setup with either the baseline or customized opts
+      require('lspconfig')[lsp].setup(opts)
     end
   end,
 }
