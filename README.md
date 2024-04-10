@@ -9,6 +9,8 @@ This is meant to be cloned into `~/.config/nvim/lua/custom/` to layer on top of 
 
 This is the most common use case; adding a language server or configuring one. To see language server info, run `:LspInfo`.
 
+To see information about installed LSPs (and DAP servers, linters, and formatters), run `:Mason`.
+
 ### Adding a language server
 
 Make sure that your language server is being installed by [`mason.lua`](https://github.com/JonZeolla/neovim/blob/main/plugins/mason.lua), and that it's also
@@ -28,7 +30,7 @@ Run `:ALEInfo`, look into the enabled linters and tweak their configurations as 
 
 ## Plugins
 
-To see information about installed plugins, run `:Mason`.
+To see information about installed plugins, run `:Mason` and `:Lazy`.
 
 ### Adding a Plugin
 
