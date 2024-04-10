@@ -20,6 +20,7 @@ local dap_ui = require("custom.plugins.dap-ui")
 local lspconfig = require("custom.plugins.lspconfig")
 local mason = require("custom.plugins.mason")
 local nvim_cmp = require("custom.plugins.nvim-cmp")
+local nvim_nio = require("custom.plugins.nvim-nio")
 local treesitter = require("custom.plugins.treesitter")
 
 local plugins = {
@@ -33,6 +34,7 @@ local plugins = {
   lspconfig,
   mason,
   nvim_cmp,
+  nvim_nio,
   treesitter,
 }
 
