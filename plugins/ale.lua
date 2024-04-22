@@ -10,7 +10,7 @@ local plugin = {
       cloudformation = {'cfn-python-lint'},
       dockerfile = {'dockerfile'},
       go = {'gopls'},
-      python = {'pylint', 'mypy', 'unimport', 'bandit', 'refurb', 'pyre', 'ruff', 'pyright'},
+      python = {'mypy', 'unimport', 'bandit', 'refurb', 'pyre', 'ruff', 'pyright'},
     }
 
     g.ale_completion_enabled = 1
