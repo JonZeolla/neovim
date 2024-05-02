@@ -2,16 +2,7 @@ local plugin = {
   "dense-analysis/ale",
   lazy = false,
   config = function()
-    local b = vim.b
     local g = vim.g
-
-    b.ale_linters = {
-      ansible = {'ansible-lint'},
-      cloudformation = {'cfn-python-lint'},
-      dockerfile = {'dockerfile'},
-      go = {'gopls'},
-      python = {'mypy', 'unimport', 'bandit', 'refurb', 'pyre', 'ruff', 'pyright'},
-    }
 
     g.ale_completion_enabled = 1
     g.ale_fixers = {

@@ -22,6 +22,7 @@ local mason = require("custom.plugins.mason")
 local nvim_cmp = require("custom.plugins.nvim-cmp")
 local nvim_nio = require("custom.plugins.nvim-nio")
 local treesitter = require("custom.plugins.treesitter")
+local venv_selector = require("custom.plugins.venv-selector")
 
 local plugins = {
   ale,
@@ -36,6 +37,7 @@ local plugins = {
   nvim_cmp,
   nvim_nio,
   treesitter,
+  venv_selector,
 }
 
 return plugins
