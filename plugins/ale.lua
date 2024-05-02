@@ -14,10 +14,6 @@ local plugin = {
     }
     g.ale_fix_on_save = 1
     g.ale_python_isort_options = '--profile black'
-    g.ale_python_auto_pipenv = 1
-    g.ale_python_pyre_auto_pipenv = 1
-    g.ale_python_refurb_auto_pipenv = 1
-    g.ale_python_ruff_auto_pipenv = 1
   end
 }
 
