@@ -11,18 +11,24 @@ local plugin = {
       "go",
       "gomod",
       "gosum",
+      "gotmpl",
       "hcl",
+      "helm",
       "html",
       "javascript",
       "jq",
       "json",
       "lua",
       "python",
+      "requirements",
       "ruby",
       "rust",
+      "terraform",
+      "tmux",
       "typescript",
       "vim",
-      "xml"
+      "xml",
+      "yaml"
     },
   }
 }

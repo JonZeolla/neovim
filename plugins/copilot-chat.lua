@@ -25,6 +25,15 @@ local plugin = {
     separator = " ",
     auto_follow_cursor = false,
   },
+  keys = {
+    { '<leader>cd', '<cmd>CopilotChatDocs<cr>' },
+    { '<leader>ce', '<cmd>CopilotChatExplain<cr>' },
+    { '<leader>cf', '<cmd>CopilotChatFix<cr>' },
+    { '<leader>cg', '<cmd>CopilotChatCommitStaged<cr>' },
+    { '<leader>co', '<cmd>CopilotChatOptimize<cr>' },
+    { '<leader>cr', '<cmd>CopilotChatReview<cr>' },
+    { '<leader>ct', '<cmd>CopilotChatTests<cr>' },
+  },
 }
 
 return plugin
