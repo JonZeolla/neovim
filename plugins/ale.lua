@@ -13,7 +13,6 @@ local plugin = {
     g.ale_fixers = {
       ['*'] = {'remove_trailing_lines', 'trim_whitespace'},
       go = {'gofmt'},
-      python = {'black', 'isort', 'ruff'},
       rust = {'rustfmt'},
       terraform = {'terraform'},
     }

@@ -16,7 +16,7 @@ local ensureInstalled = {
   "lua-language-server",
   "powershell-editor-services",
   "pyright",
-  "ruff-lsp",
+  "ruff",
   "terraform-ls",
   "typos-lsp",
   "yaml-language-server",

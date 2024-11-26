@@ -21,7 +21,7 @@ local servers = {
   "lua_ls",
   "powershell_es",
   "pyright",
-  "ruff_lsp",
+  "ruff",
   "terraformls",
   "typos_lsp",
   "yamlls",
