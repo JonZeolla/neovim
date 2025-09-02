@@ -15,7 +15,7 @@ vim.cmd('set ignorecase smartcase')
 vim.cmd('set nohlsearch')
 -- Line length details
 vim.cmd('set textwidth=150')
-vim.cmd('set colorcolumn=160')
+vim.cmd('set colorcolumn=151')
 -- Don't word wrap when typing text
 vim.cmd('set formatoptions-=t')
 -- Share the macOS clipboard
