@@ -4,9 +4,9 @@ M.general = {
   -- Normal mode keybindings
   n = {
     ["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "Git status"},
-    ["<leader>dj"] = { "vim.diagnostic.goto_next", {buffer=0} },
-    ["<leader>dk"] = { "vim.diagnostic.goto_previous", {buffer=0} },
-    ["<leader>dl"] = { "<cmd>Telescope diagnostics<CR>", {buffer=0}}
+    ["<leader>dj"] = { "vim.diagnostic.goto_next", "Go to next" },
+    ["<leader>dk"] = { "vim.diagnostic.goto_previous", "Go to previous" },
+    ["<leader>dl"] = { "<cmd>Telescope diagnostics<CR>", "Diagnostics"}
   }
 }
 
