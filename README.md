@@ -1,87 +1,102 @@
 # Jon Zeolla custom neovim configs
 
-This is meant to be cloned into `~/.config/nvim/lua/custom/` to layer on top of [NvChad](https://nvchad.com/). Some notable details:
+This is a complete [LazyVim](https://www.lazyvim.org/) configuration meant to be cloned directly to `~/.config/nvim/`.
 
-- `custom/init.lua` is for general settings and configs done in the buffer or global contexts.
-- `custom/plugins/PLUGIN_NAME.lua` is setup specifics for a specific plugin.
+## Installation
 
-## Language servers
+```bash
+# Backup existing config if any
+mv ~/.config/nvim ~/.config/nvim.bak
 
-This is the most common use case; adding a language server or configuring one. To see language server info, run `:LspInfo`.
+# Clone this repo
+git clone https://github.com/jonzeolla/neovim.git ~/.config/nvim
+
+# Remove git history (optional, for personal use)
+rm -rf ~/.config/nvim/.git
+
+# Open neovim to install plugins
+nvim
+```
+
+## Structure
+
+```
+~/.config/nvim/
+├── init.lua                    # LazyVim bootstrap
+├── lua/
+│   ├── config/
+│   │   ├── autocmds.lua        # Custom autocommands
+│   │   ├── keymaps.lua         # Custom keymaps
+│   │   ├── lazy.lua            # lazy.nvim + LazyVim extras setup
+│   │   └── options.lua         # Custom vim options
+│   └── plugins/
+│       ├── conform.lua         # Formatters (format on save)
+│       ├── copilot-chat.lua    # CopilotChat custom prompts + keybindings
+│       ├── dap-python.lua      # DAP Python setup
+│       ├── lsp.lua             # LSP servers + mason
+│       ├── nvim-cmp.lua        # Completion customization
+│       ├── treesitter.lua      # Treesitter languages
+│       └── venv-selector.lua   # Python venv selector
+└── stylua.toml
+```
+
+## LazyVim Extras Enabled
+
+- `lazyvim.plugins.extras.coding.copilot` - GitHub Copilot integration
+- `lazyvim.plugins.extras.dap.core` - Debug Adapter Protocol
+- `lazyvim.plugins.extras.dap.nlua` - Lua debugging
+
+## Custom Keybindings
+
+| Mapping | Action |
+|---------|--------|
+| `<Leader>s` | Toggle spellcheck |
+| `<leader>gs` | Telescope git status |
+| `<leader>dj` | Next diagnostic |
+| `<leader>dk` | Previous diagnostic |
+| `<leader>dl` | Telescope diagnostics list |
+| `<leader>db` | DAP toggle breakpoint |
+| `<leader>dpr` | DAP Python test method |
+| `<leader>pyv` | Select Python venv |
+| `<leader>cd` | CopilotChat Docs |
+| `<leader>ce` | CopilotChat Explain |
+| `<leader>cf` | CopilotChat Fix |
+| `<leader>cg` | CopilotChat CommitStaged |
+| `<leader>co` | CopilotChat Optimize |
+| `<leader>cr` | CopilotChat Review |
+| `<leader>ct` | CopilotChat Tests |
+
+## Language Servers
+
+To see language server info, run `:LspInfo`.
 
 To see information about installed LSPs (and DAP servers, linters, and formatters), run `:Mason`.
 
-### Adding a language server
+### Included LSPs
 
-Make sure that your language server is being installed by [`mason.lua`](https://github.com/JonZeolla/neovim/blob/main/plugins/mason.lua), and that it's also
-being configured/loaded by [`lspconfig.lua`](https://github.com/JonZeolla/neovim/blob/main/plugins/lspconfig.lua).
-
-### Configuring a language server
-
-If you need a custom configuration for the language server, go to [`lspconfig.lua`](https://github.com/JonZeolla/neovim/blob/main/plugins/lspconfig.lua), add
-the language server to the `customized` local variable, and then create a corresponding `language_servers/<name>.lua` file with the configuration. See [that
-folder](https://github.com/JonZeolla/neovim/blob/main/language_servers) for examples.
-
-### A note about ALE
-
-If you're having a hard time figuring out which language server is creating a diagnostic message, it's probably one of the ALE linters.
-
-Run `:ALEInfo`, look into the enabled linters and tweak their configurations as needed.
+- ansible-language-server, awk-language-server, bash-language-server
+- bicep-lsp, css-lsp, cypher-language-server
+- docker-compose-language-service, dockerfile-language-server
+- gopls, helm-ls, html-lsp, java-language-server
+- json-lsp, lua-language-server, powershell-editor-services
+- pyright, ruff, terraform-ls, typos-lsp, yaml-language-server
 
 ## Plugins
 
-To see information about installed plugins, run `:Mason` and `:Lazy`.
+To see information about installed plugins, run `:Lazy`.
 
-### Adding a Plugin
+## Updating
 
-Add the new plugin to the [`mason.lua`](https://github.com/JonZeolla/neovim/blob/main/plugins/mason.lua) to ensure it gets properly installed and updated over
-time.
+```bash
+# Update plugins
+nvim --headless "+Lazy update" +qa
 
-### Configuring a Plugin
-
-To configure a plugin, edit [`plugins.lua`](https://github.com/JonZeolla/neovim/blob/main/plugins.lua) to add a new `local`, and add it to the `plugins` local.
-Then you can create a new file under [`plugins`](https://github.com/JonZeolla/neovim/tree/main/plugins) with a matching name and a configuration similar to:
-
-```lua
-local plugin = {
-    "thething/here",
-    dependencies = {"anyoptional/dependencies"},
-    opts = {
-        optional = { opts = "here" },
-    }
-    config = function()
-      require("thething").setup({
-          configuration = {
-              enabled = true,
-          }
-          })
-    end
-}
-
-return plugin
+# Update Mason packages
+nvim --headless "+MasonUpdate" +qa
 ```
 
-Keep in mind that `dependencies`, and `opts` are entirely optional (more on `opts` in the docs below) and just examples. `config` should probably exist, but a
-minimal version would look more like:
+## Other Notes
 
-```lua
-config = function()
-  require("thing").setup()
-end
-```
-
-When configuring a plugin, check out the other [`plugins` here](https://github.com/JonZeolla/neovim/tree/main/plugins) and refer to the docs of the plugin
-you're setting up.
-
-## opts vs config
-
-In `plugins/` if we specify an `opts` then it will run `require("PLUGIN_NAME_HERE").setup(opts)` without needing to explicitly configure it to do so.
-
-`config` is useful when you're running `setup()` for a plugin manually. If you set both `config` and `opts`, the `opts` table becomes the second argument to the
-`setup()` function.
-
-## Other notes
-
-To check what LSPs are setup/attached, use `:LspInfo`.
-
-`cmp` plugins are completion-related, whereas `lsp` are the language servers.
+- To check what LSPs are attached to the current buffer: `:LspInfo`
+- Theme: tokyonight (LazyVim default)
+- Formatters run on save via conform.nvim
