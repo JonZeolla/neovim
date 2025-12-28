@@ -21,3 +21,7 @@ end, { desc = "DAP Python test method" })
 
 -- Venv selector (from venv-selector.lua)
 map("n", "<leader>pyv", "<cmd>VenvSelect<cr>", { desc = "Select Python venv" })
+
+-- Comment toggle
+map("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment" })
+map("v", "<leader>/", "gc", { remap = true, desc = "Toggle comment" })
