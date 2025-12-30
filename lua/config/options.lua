@@ -30,8 +30,9 @@ vim.opt.hlsearch = false
 vim.opt.textwidth = 150
 vim.opt.colorcolumn = "151"
 
--- Don't word wrap when typing text
+-- Don't word wrap when typing text, but wrap otherwise
 vim.opt.formatoptions:remove("t")
+vim.opt.wrap = true
 
 -- Share the macOS clipboard
 vim.opt.clipboard = "unnamed"
