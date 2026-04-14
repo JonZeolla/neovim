@@ -16,13 +16,13 @@ return {
         "gopls",
         "helm-ls",
         "html-lsp",
-        "java-language-server",
+        "jdtls",
         "json-lsp",
         "lua-language-server",
         "powershell-editor-services",
         "pyright",
         "ruff",
-        "terraform-ls",
+        "tofu-ls",
         "typos-lsp",
         "yaml-language-server",
         "debugpy",
@@ -41,6 +41,12 @@ return {
               workspace = { library = vim.api.nvim_get_runtime_file("", true) },
             },
           },
+        },
+        terraformls = { enabled = false },
+        tofu_ls = {
+          on_attach = function(client)
+            client.server_capabilities.semanticTokensProvider = nil
+          end,
         },
         yamlls = {
           settings = {
